@@ -23,20 +23,18 @@ public class Race {
         positions = new int[num];
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-
-    }
-
     public void start(){
         int turn = 0;
+        int nowRank = 1;
 
         while (!is_over()){
             turn++;
             advance();
             getPositions();
+            nowRank = ranking(nowRank);
             print(turn);
         }
+        result();
     }
 
     public void input_num(){
@@ -113,11 +111,34 @@ public class Race {
     }
 
     public void result(){
+        System.out.printf("우승자는 ");
+        for(int i = 0; i < num; i++){
+            if(rank[i] == 1)
+                System.out.printf("%d번쨰 ", i+1);
+        }
+        System.out.println("말입니다!");
+        System.out.println("===========================================");
+        for(int i = 1; i <= num; i++)
+            for(int j = 0; j < num; j++)
+                if(rank[j] == i)
+                    System.out.printf("%d등 : %d번째 말\n", i, j+1);
 
+        System.out.println("===========================================");
+        if(rank[pick] == 1)
+            System.out.println("축하드립니다! 당신은 승리하셨습니다!");
+        else
+            System.out.println("당신은 패배하셨습니다. :(");
     }
 
-    public int ranking(int rank){
-        return rank;
+    public int ranking(int nowRank){
+        int count = 0;
+        for(int i = 0; i < num; i++){
+            if(positions[i] == 20 && rank[i] == 0){
+                rank[i] = nowRank;
+                count++;
+            }
+        }
+        return nowRank+count;
     }
 
     public void getPositions(){
