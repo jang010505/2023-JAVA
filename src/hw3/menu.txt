@@ -1,0 +1,6 @@
+p shrimp pizza; 15000 1000
+p pepperoni pizza; 10000 500
+s pasta; 5000 300
+s Buffalo wing; 4500 200
+d coke; 1000 200
+d sprite; 1000 200
